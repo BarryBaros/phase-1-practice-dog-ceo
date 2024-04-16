@@ -27,3 +27,24 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// Challenge 2
+ // Function to fetch dog breeds and render them to the DOM
+    function fetchDogBreeds() {
+      const breedUrl = "https://dog.ceo/api/breeds/list/all";
+      
+      fetch(breedUrl)
+        .then(response => response.json())
+        .then(data => {
+          const breedList = document.getElementById("dog-breeds");
+          // Loop through each breed and create list item elements
+          for (const breed in data.message) {
+            const listItem = document.createElement("li");
+            listItem.textContent = breed;
+            breedList.appendChild(listItem);
+          }
+        })
+        .catch(error => console.error("Error fetching dog breeds:", error));
+    }
+
+    // Call the fetchDogBreeds function when the page loads
+    window.addEventListener("load", fetchDogBreeds);
